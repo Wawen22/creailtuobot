@@ -11,9 +11,8 @@ import { DiagnosticSection } from '@/components/DiagnosticSection'
 import { ChatSection } from '@/components/ChatSection'
 import { ReviewsSection } from '@/components/ReviewsSection'
 import { Footer } from '@/components/Footer'
-import { SectionTransition } from '@/components/SectionTransition'
-import { EasterEgg } from '@/components/EasterEgg'
 import { SectionNavigation } from '@/components/SectionNavigation'
+import { EasterEgg } from '@/components/EasterEgg'
 
 export default function Home() {
   const [bootDone, setBootDone] = useState(false)
@@ -48,17 +47,11 @@ export default function Home() {
         <main className="bg-paper min-h-screen pb-24">
           <Nav />
           <HeroSection />
-          <SectionTransition command="cat specs.yaml" nextSectionId="specs" />
           <SpecsSection />
-          <SectionTransition command="cat patch_notes.md" nextSectionId="patches" />
           <PatchNotesSection />
-          <SectionTransition command="./run_compatibility_test.sh" nextSectionId="compatibility" />
           <CompatibilityTest />
-          <SectionTransition command="sudo bot-diagnostic --help" nextSectionId="diagnostic" />
           <DiagnosticSection />
-          <SectionTransition command="./open_chat.sh --bot=ana_bot" nextSectionId="chat" />
           <ChatSection />
-          <SectionTransition command="cat reviews.json | jq '.[]'" nextSectionId="reviews" />
           <ReviewsSection />
           <Footer />
           <SectionNavigation />
