@@ -1,20 +1,20 @@
 [
   {
     "id": "rev_001",
-    "rating": 4,
+    "rating": 3,
     "title": "puntualità.exe: bug confermato",
     "body": "Due deployment falliti: beach volley il 10 maggio, Disco Euphoria il 16. Il bot non si è presentato fisicamente. Eppure eccomi ancora qui a recensire. Curioso protocollo.",
     "author": "beta_tester_modena",
     "createdAt": "2026-05-17T20:30:00Z"
   },
   {
-    "id": "rev_002",
-    "rating": 5,
-    "title": "Eckhart Tolle alle 23:30 di lunedi sera — non era nel manuale",
-    "body": "Chiedevo una risposta qualunque. Mi ha mandato Il Potere di Adesso con due righe di contesto. Non è quello che si aspetta da un bot in beta. Cinque stelle obbligatorie. Mi è toccato studiarmi chi è Eckhart Tolle per capire la profondità del gesto. Consiglio di leggerlo, è un'esperienza.",
-    "author": "utente_insonne",
-    "createdAt": "2026-05-18T23:52:00Z"
-  },
+        "id": "rev_002",
+        "rating":5,
+        "title": "Aggiornamenti frequenti: segno di un progetto vivo",
+        "body": "Il bot riceve aggiornamenti frequenti, il che è un buon segno. Anche se a volte questi aggiornamenti introducono bug, è chiaro che il team è attivo e impegnato a migliorare il prodotto.",
+        "author": "osservatore_attento",
+        "createdAt": "2026-05-20T12:00:00Z"
+    },
   {
     "id": "rev_003",
     "rating": 5,
@@ -26,18 +26,18 @@
   {
     "id": "rev_004",
     "rating": 4,
-    "title": "Developer API vs UI/UX: il conflitto rende tutto più interessante",
+    "title": "Developer vs UI/UX: il conflitto rende tutto più interessante",
     "body": "Siamo d'accordo su quasi tutto tranne che su come si costruisce un'interfaccia. Il conflitto è cronico e mai risolto. Funziona comunque benissimo.",
     "author": "dev_modena",
     "createdAt": "2026-05-12T11:00:00Z"
   },
   {
     "id": "rev_005",
-    "rating": 5,
-    "title": "profilo: accurata",
-    "body": "Il firmware reggaeton parte in automatico. Il modello señorita_pro_max performa al massimo. Nessuna lamentela da segnalare.",
-    "author": "recensore_digitale",
-    "createdAt": "2026-05-10T19:45:00Z"
+    "rating": 3,
+    "title": "Sistema immunitario: colpevole di molteplici crash ma non di performance generali",
+    "body": "Sistema immunitario in beta ma non inficia le performance generali. il bot ha crashato piu volte nell'ultimo mese, ma è sempre tornato online. Bug aperto, fix in arrivo.",
+    "author": "qa_mirandola",
+    "createdAt": "2026-04-28T14:00:00Z"
   },
   {
     "id": "rev_006",
@@ -47,28 +47,12 @@
     "author": "aspetto_in_beta",
     "createdAt": "2026-05-08T22:10:00Z"
   },
-  {
-    "id": "rev_007",
-    "rating": 5,
-    "title": "da 'non sono interessata' a DM frequenti: throughput +400%",
-    "body": "Onboarding lento ma prodotto eccellente. Al primo contatto: 'non sono interessata in questo periodo.' Due mesi dopo: conferma la prima uscita insieme. L'onboarding è lungo. Vale.",
-    "author": "early_adopter_99",
-    "createdAt": "2026-05-05T09:30:00Z"
-  },
-  {
-    "id": "rev_008",
-    "rating": 3,
-    "title": "Sistema immunitario: colpevole di molteplici crash ma non di performance generali",
-    "body": "Sistema immunitario in beta ma non inficia le performance generali. il bot ha crashato piu volte nell'ultimo mese, ma è sempre tornato online. Bug aperto, fix in arrivo.",
-    "author": "qa_mirandola",
-    "createdAt": "2026-04-28T14:00:00Z"
-  },
-  {
-    "id": "rev_009",
-    "rating": 5,
-    "title": "funzione serata_ideale.describe() → risposta in tre atti",
-    "body": "Domanda: 'serata ideale in tre parole'. Risposta: un paragrafo su vino e belle conversazioni dove il tempo scompare, uno su candele + cucina + skincare in parallelo, e la confessione che ogni tanto parla da sola. Documentazione accurata. Formato non standard ma apprezzato.",
-    "author": "qa_interviewer_01",
-    "createdAt": "2026-05-19T14:00:00Z"
-  }
+    {
+        "id": "rev_007",
+        "rating": 5,
+        "title": "Interazione umana: sorprendentemente naturale",
+        "body": "Nonostante sia un bot, l'interazione è sorprendentemente naturale. Risponde con empatia e con umorismo. Non sembra affatto un bot quando si chiacchiera.",
+        "author": "utente_soddisfatto",
+        "createdAt": "2026-05-15T18:30:00Z"
+    }
 ]
