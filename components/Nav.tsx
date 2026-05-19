@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
+import { SunflowerDecoration } from '@/components/SunflowerDecoration'
 
 const NAV_LINKS = [
   { label: 'specs', href: '#specs' },
@@ -42,9 +43,18 @@ export function Nav() {
           className="fixed top-0 left-0 right-0 z-50 backdrop-blur-md bg-paper/90 border-b border-[var(--border-soft)]"
         >
           <div className="max-w-5xl mx-auto px-6 h-14 flex items-center justify-between">
-            <span className="font-mono text-xs text-ink-faint">
-              <span className="text-gold">ana_bot</span> v2.7.3-beta
-            </span>
+            <div className="flex items-center gap-2">
+              <motion.div
+                animate={{ rotate: 360 }}
+                transition={{ duration: 25, repeat: Infinity, ease: 'linear' }}
+                className="pointer-events-none select-none"
+              >
+                <SunflowerDecoration size={22} opacity={0.85} />
+              </motion.div>
+              <span className="font-mono text-xs text-ink-faint">
+                <span className="text-gold">ana_bot</span> v2.7.3-beta
+              </span>
+            </div>
 
             {/* Desktop links */}
             <div className="hidden md:flex items-center gap-7">

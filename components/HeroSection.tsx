@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion'
 import { StatusPill } from './StatusPill'
+import { SunflowerDecoration } from './SunflowerDecoration'
 
 const COMPAT_ROWS = [
   { icon: '🌻', tech: 'girasoli', status: '✓ nativa', type: 'ok' },
@@ -47,9 +48,18 @@ export function HeroSection() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
           >
-            <h1 className="font-display font-light italic leading-none text-ink tracking-tight text-[clamp(56px,10vw,96px)]">
-              and.dan
-            </h1>
+            <div className="flex items-center gap-4">
+              <h1 className="font-display font-light italic leading-none text-ink tracking-tight text-[clamp(56px,10vw,96px)]">
+                ana.dan
+              </h1>
+              <motion.div
+                animate={{ rotate: 360 }}
+                transition={{ duration: 20, repeat: Infinity, ease: 'linear' }}
+                className="pointer-events-none select-none mt-1"
+              >
+                <SunflowerDecoration size={48} opacity={0.85} />
+              </motion.div>
+            </div>
             <p className="font-mono text-sm text-ink-muted mt-3 leading-relaxed">
               human_bot · UI/UX class · girasole_core enabled
             </p>
