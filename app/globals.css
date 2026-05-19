@@ -51,12 +51,9 @@
 html {
   scroll-behavior: smooth;
   scroll-padding-top: 80px;
-  scroll-snap-type: y mandatory;
 }
 
 section {
-  scroll-snap-align: start;
-  scroll-snap-stop: always;
   min-height: 100dvh;
   display: flex;
   flex-direction: column;
@@ -72,9 +69,7 @@ section:nth-of-type(even) {
   justify-content: flex-start;
 }
 
-footer {
-  scroll-snap-align: start;
-}
+
 
 body {
   background-color: #FDFAF5;
