@@ -13,6 +13,8 @@ import { ReviewsSection } from '@/components/ReviewsSection'
 import { Footer } from '@/components/Footer'
 import { SectionNavigation } from '@/components/SectionNavigation'
 import { EasterEgg } from '@/components/EasterEgg'
+import { SunflowerDecoration } from '@/components/SunflowerDecoration'
+import { motion } from 'framer-motion'
 
 export default function Home() {
   const [bootDone, setBootDone] = useState(false)
@@ -56,6 +58,16 @@ export default function Home() {
           <Footer />
           <SectionNavigation />
         </main>
+      )}
+      {/* Fixed rotating sunflower — bottom-right, stesso livello del nav pill */}
+      {bootDone && (
+        <motion.div
+          className="fixed bottom-5 right-5 z-50 pointer-events-none select-none"
+          animate={{ rotate: 360 }}
+          transition={{ duration: 25, repeat: Infinity, ease: 'linear' }}
+        >
+          <SunflowerDecoration size={44} opacity={0.7} />
+        </motion.div>
       )}
       {showEasterEgg && <EasterEgg onClose={() => setShowEasterEgg(false)} />}
     </>
