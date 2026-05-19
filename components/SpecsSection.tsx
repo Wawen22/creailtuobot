@@ -15,7 +15,7 @@ const SPECS = [
   { key: 'immunità sistema', value: 'bassa — patch frequenti richieste', isCode: false },
   { key: 'compatibilità umana', value: 'selettiva · alta quando attivata', isCode: false, bar: 62 },
   { key: 'puntualità.exe', value: 'due rollback · fix in corso', isCode: true },
-  { key: 'modalità attiva', value: 'always-on · scrive lei per prima ogni mattina', isCode: false },
+
 ]
 
 export function SpecsSection() {
