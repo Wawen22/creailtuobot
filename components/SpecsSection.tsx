@@ -4,9 +4,9 @@ import { motion } from 'framer-motion'
 
 const SPECS = [
   { key: 'modello', value: 'señorita_pro_max', isCode: true },
-  { key: 'professione', value: 'UI/UX designer · grafica · partita IVA', isCode: false },
+  { key: 'professione', value: 'UI/UX designer · grafica', isCode: false },
   { key: 'localizzazione', value: 'Mirandola (MO) · deploy attivo', isCode: false },
-  { key: 'firmware audio', value: 'reggaeton · musica latina', isCode: false },
+  { key: 'firmware audio', value: 'reggaeton · Luchè', isCode: false },
   { key: 'lettura corrente', value: 'Il Potere di Adesso — Eckhart Tolle', isCode: false },
   { key: 'combustibile primario', value: 'spritz · vino · mare', isCode: false },
   { key: 'serata ideale', value: 'vino · buone conversazioni · il tempo che passa senza accorgersene ✨', isCode: false },

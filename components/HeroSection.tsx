@@ -37,7 +37,7 @@ export function HeroSection() {
             <StatusPill status="ONLINE" />
             <StatusPill status="BETA" />
             <span className="font-mono text-[11px] text-ink-faint">
-              v2.7.3-beta · build 2026.mirandola
+              v2.7.3-beta · build 2026.05.21
             </span>
           </motion.div>
 
@@ -66,7 +66,7 @@ export function HeroSection() {
             <div className="space-y-3.5">
               {[
                 { k: 'modello', v: 'señorita_pro_max', gold: true },
-                { k: 'build', v: '2026.mirandola', gold: false },
+                { k: 'build', v: '2026.05.21', gold: false },
                 { k: 'status', v: 'ONLINE · beta perenne', green: true },
                 { k: 'firma', v: '🌻 (crittografata)', gold: false },
               ].map(({ k, v, gold, green }) => (
