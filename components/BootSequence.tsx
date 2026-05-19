@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 
 const BOOT_LINES = [
-  { text: '[boot] loading ana_dan.profile......', suffix: ' ok', delay: 0 },
+  { text: '[boot] loading and.dan.profile......', suffix: ' ok', delay: 0 },
   { text: '[boot] mounting señorita_edition....', suffix: ' ok', delay: 200 },
   { text: '[boot] syncing mirandola.context....', suffix: ' ok', delay: 420 },
   { text: '[boot] loading 🌻 · trust_level: alto', suffix: ' ok', delay: 640 },

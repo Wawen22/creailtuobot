@@ -48,7 +48,7 @@ export function HeroSection() {
             transition={{ duration: 0.7, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
           >
             <h1 className="font-display font-light italic leading-none text-ink tracking-tight text-[clamp(56px,10vw,96px)]">
-              ana_dan
+              and.dan
             </h1>
             <p className="font-mono text-sm text-ink-muted mt-3 leading-relaxed">
               human_bot · UI/UX class · girasole_core enabled
@@ -66,7 +66,6 @@ export function HeroSection() {
             <div className="space-y-3.5">
               {[
                 { k: 'modello', v: 'señorita_pro_max', gold: true },
-                { k: 'edition', v: 'señorita edition', gold: false },
                 { k: 'build', v: '2026.mirandola', gold: false },
                 { k: 'status', v: 'ONLINE · beta perenne', green: true },
                 { k: 'firma', v: '🌻 (crittografata)', gold: false },

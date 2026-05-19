@@ -24,11 +24,11 @@ const jetbrainsMono = JetBrains_Mono({
 })
 
 export const metadata: Metadata = {
-  title: 'ana_dan v2.7.3-beta — profilo ufficiale',
+  title: 'and.dan v2.7.3-beta — profilo ufficiale',
   description:
-    'ana_bot · señorita edition · UI/UX class · girasole_core enabled · modalità beta perenne',
+    'ana_bot · UI/UX class · girasole_core enabled · modalità beta perenne',
   openGraph: {
-    title: 'ana_dan v2.7.3-beta — profilo ufficiale',
+    title: 'and.dan v2.7.3-beta — profilo ufficiale',
     description:
       'Profilo ufficiale ana_bot señorita_pro_max. Status: ONLINE, in costante aggiornamento. 🌻',
     type: 'website',

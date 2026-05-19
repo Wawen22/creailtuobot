@@ -10,6 +10,7 @@ export function DiagnosticSection() {
   const [isLoading, setIsLoading] = useState(false)
   const [hasResult, setHasResult] = useState(false)
   const [error, setError] = useState('')
+  const [focused, setFocused] = useState(false)
   const abortRef = useRef<AbortController | null>(null)
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -79,7 +80,7 @@ export function DiagnosticSection() {
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          <div className="mb-10">
+          <div className="mb-8">
             <h2 className="font-display italic font-light text-[32px] text-ink leading-none mb-2">
               Diagnostica del sistema
             </h2>
@@ -88,40 +89,105 @@ export function DiagnosticSection() {
             </p>
           </div>
 
-          <form onSubmit={handleSubmit} className="space-y-4 mb-8">
-            <div>
-              <label className="font-mono text-[11px] text-ink-faint block mb-1.5">
-                input diagnostica
-              </label>
-              <textarea
-                value={problem}
-                onChange={(e) => setProblem(e.target.value)}
-                placeholder="es. 'non capisco certi comportamenti in beta...' — il bot diagnostica tutto"
-                rows={4}
-                maxLength={500}
-                className="w-full px-4 py-3 bg-elevated border rounded-lg text-sm text-ink placeholder:text-ink-faint focus:outline-none transition-colors resize-none leading-relaxed"
-                style={{ borderColor: 'var(--border-soft)' }}
-                onFocus={(e) => {
-                  e.currentTarget.style.borderColor = '#D4A843'
-                }}
-                onBlur={(e) => {
-                  e.currentTarget.style.borderColor = 'var(--border-soft)'
-                }}
-              />
-              <p className="font-mono text-[10px] text-ink-faint mt-1 text-right">
-                {problem.length}/500
-              </p>
+          {/* Quick-fill chips */}
+          <div className="mb-5">
+            <p className="font-mono text-[10px] text-ink-faint mb-2">problemi frequenti →</p>
+            <div className="flex flex-wrap gap-2">
+              {[
+                'puntualità.exe ha crashato ancora',
+                'comportamenti in beta non documentati',
+                'sistema immunitario instabile',
+                'release finale: ETA indefinita',
+                'dottore/paziente: conflitto di ruolo',
+              ].map((chip) => (
+                <button
+                  key={chip}
+                  type="button"
+                  onClick={() => setProblem(chip)}
+                  className="font-mono text-[10px] px-2.5 py-1 rounded-md border transition-all duration-150 active:scale-95"
+                  style={{
+                    borderColor: problem === chip ? 'rgba(76,175,114,0.5)' : 'var(--border-soft)',
+                    color: problem === chip ? '#4CAF72' : '#7A736B',
+                    background: problem === chip ? 'rgba(76,175,114,0.06)' : 'transparent',
+                  }}
+                >
+                  {chip}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          <form onSubmit={handleSubmit} className="mb-8">
+            {/* Terminal dark card */}
+            <div
+              className="rounded-xl overflow-hidden mb-4 transition-all duration-200"
+              style={{
+                background: '#0D0E0B',
+                border: `1.5px solid ${focused ? 'rgba(76,175,114,0.5)' : 'rgba(76,175,114,0.18)'}`,
+                boxShadow: focused ? '0 0 0 3px rgba(76,175,114,0.08)' : 'none',
+              }}
+            >
+              {/* Terminal chrome */}
+              <div
+                className="px-4 py-2.5 border-b flex items-center gap-3"
+                style={{ borderColor: 'rgba(76,175,114,0.1)' }}
+              >
+                <div className="flex gap-1.5">
+                  <div className="w-2.5 h-2.5 rounded-full" style={{ background: 'rgba(224,92,92,0.5)' }} />
+                  <div className="w-2.5 h-2.5 rounded-full" style={{ background: 'rgba(232,148,58,0.5)' }} />
+                  <div className="w-2.5 h-2.5 rounded-full" style={{ background: 'rgba(76,175,114,0.5)' }} />
+                </div>
+                <span className="font-mono text-[11px]" style={{ color: '#4A4540' }}>
+                  sudo bot-diagnostic --mode=verbose
+                </span>
+              </div>
+
+              {/* Input area */}
+              <div className="p-4">
+                <div className="flex items-center gap-2 mb-3">
+                  <span className="font-mono text-[11px]" style={{ color: '#4CAF72' }}>$</span>
+                  <span className="font-mono text-[11px]" style={{ color: '#4A4540' }}>describe_problem --verbose</span>
+                </div>
+                <div className="flex items-start gap-2">
+                  <span className="font-mono text-sm mt-3 shrink-0" style={{ color: '#4CAF72' }}>→</span>
+                  <textarea
+                    value={problem}
+                    onChange={(e) => setProblem(e.target.value)}
+                    onFocus={() => setFocused(true)}
+                    onBlur={() => setFocused(false)}
+                    placeholder="inserisci il problema da diagnosticare..."
+                    rows={4}
+                    maxLength={500}
+                    className="flex-1 bg-transparent font-mono text-sm focus:outline-none resize-none leading-relaxed pt-3 placeholder:opacity-30"
+                    style={{ color: '#D4CEBC', caretColor: '#4CAF72' }}
+                  />
+                </div>
+                <div className="flex justify-end mt-1">
+                  <span className="font-mono text-[10px]" style={{ color: '#4A4540' }}>
+                    {problem.length}/500
+                  </span>
+                </div>
+              </div>
             </div>
 
             <button
               type="submit"
               disabled={!problem.trim() || isLoading}
-              className="flex items-center gap-2.5 px-6 py-3 bg-ink text-paper text-sm font-medium rounded-lg transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
+              className="flex items-center gap-2.5 px-6 py-3 text-sm font-medium rounded-lg transition-all duration-150 disabled:opacity-40 disabled:cursor-not-allowed active:scale-[0.99]"
+              style={{
+                background: '#0D0E0B',
+                color: '#4CAF72',
+                border: '1.5px solid rgba(76,175,114,0.3)',
+              }}
               onMouseEnter={(e) => {
-                if (!e.currentTarget.disabled) e.currentTarget.style.background = '#4A4540'
+                if (!e.currentTarget.disabled) {
+                  e.currentTarget.style.borderColor = 'rgba(76,175,114,0.7)'
+                  e.currentTarget.style.background = '#1C1E18'
+                }
               }}
               onMouseLeave={(e) => {
-                e.currentTarget.style.background = '#1A1714'
+                e.currentTarget.style.borderColor = 'rgba(76,175,114,0.3)'
+                e.currentTarget.style.background = '#0D0E0B'
               }}
             >
               {isLoading ? (
@@ -130,15 +196,18 @@ export function DiagnosticSection() {
                     {[0, 150, 300].map((d) => (
                       <span
                         key={d}
-                        className="w-1 h-1 rounded-full bg-paper animate-bounce"
-                        style={{ animationDelay: `${d}ms` }}
+                        className="w-1 h-1 rounded-full animate-bounce"
+                        style={{ background: '#4CAF72', animationDelay: `${d}ms` }}
                       />
                     ))}
                   </span>
                   eseguendo diagnostica...
                 </>
               ) : (
-                'esegui diagnostica →'
+                <>
+                  <span className="font-mono text-[11px] opacity-60">[→]</span>
+                  esegui diagnostica
+                </>
               )}
             </button>
           </form>

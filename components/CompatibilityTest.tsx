@@ -4,19 +4,58 @@ import { useState, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { StreamingTerminal } from './StreamingTerminal'
 
+const FIELDS = [
+  {
+    id: 'name' as const,
+    num: '01',
+    label: 'codice utente',
+    sublabel: 'il tuo nome o come ti presenti',
+    placeholder: 'rad_dev · señor_qualsiasi · papasito_42',
+    chips: ['rad_dev', 'señor_qualsiasi', 'utente_beta_01', 'papasito_42'],
+    max: 50,
+  },
+  {
+    id: 'trait' as const,
+    num: '02',
+    label: 'parametro caratterizzante',
+    sublabel: "una cosa che ti descrive",
+    placeholder: 'developer fullstack · nocturnale · ama il reggaeton',
+    chips: ['developer fullstack', 'ama il mare', 'nocturnale', 'ironico & diretto'],
+    max: 100,
+  },
+  {
+    id: 'looking' as const,
+    num: '03',
+    label: 'obiettivo della ricerca',
+    sublabel: "cosa cerchi in un'altra persona",
+    placeholder: 'qualcuno con cui camminare 8km · persona presente',
+    chips: ['persona presente', 'camminate lunghe', 'conversazioni vere', 'complicità'],
+    max: 100,
+  },
+]
+
 export function CompatibilityTest() {
   const [name, setName] = useState('')
   const [trait, setTrait] = useState('')
-  const [lookingFor, setLookingFor] = useState('')
+  const [looking, setLooking] = useState('')
   const [output, setOutput] = useState('')
   const [isLoading, setIsLoading] = useState(false)
   const [hasResult, setHasResult] = useState(false)
   const [error, setError] = useState('')
+  const [focused, setFocused] = useState<string | null>(null)
   const abortRef = useRef<AbortController | null>(null)
+
+  const filledCount = [name, trait, looking].filter((v) => v.trim()).length
+
+  const getFieldState = (id: 'name' | 'trait' | 'looking') => {
+    if (id === 'name') return [name, setName] as const
+    if (id === 'trait') return [trait, setTrait] as const
+    return [looking, setLooking] as const
+  }
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    if (!name.trim() || !trait.trim() || !lookingFor.trim()) return
+    if (!name.trim() || !trait.trim() || !looking.trim()) return
 
     abortRef.current?.abort()
     abortRef.current = new AbortController()
@@ -33,7 +72,7 @@ export function CompatibilityTest() {
         body: JSON.stringify({
           name: name.trim(),
           trait: trait.trim(),
-          looking_for: lookingFor.trim(),
+          looking_for: looking.trim(),
         }),
         signal: abortRef.current.signal,
       })
@@ -72,7 +111,7 @@ export function CompatibilityTest() {
     }
   }
 
-  const canSubmit = name.trim() && trait.trim() && lookingFor.trim() && !isLoading
+  const canSubmit = name.trim() && trait.trim() && looking.trim() && !isLoading
 
   return (
     <section id="compatibility" className="py-16 md:py-24">
@@ -83,88 +122,129 @@ export function CompatibilityTest() {
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          <div className="mb-10">
+          <div className="mb-8">
             <h2 className="font-display italic font-light text-[32px] text-ink leading-none mb-2">
               Test di compatibilità
             </h2>
             <p className="text-sm text-ink-muted">
-              inserisci i tuoi dati · il sistema calcolerà la compatibilità con ana_bot v2.7.3-beta
+              inserisci i parametri · il sistema calcola la compatibilità con ana_bot v2.7.3-beta
             </p>
           </div>
 
-          <form onSubmit={handleSubmit} className="space-y-4 mb-8">
-            {[
-              {
-                id: 'name',
-                label: 'il tuo nome (o codice utente)',
-                placeholder: 'es. rad_dev · señor_qualsiasi · papasito_42',
-                value: name,
-                onChange: setName,
-                max: 50,
-              },
-              {
-                id: 'trait',
-                label: 'una tua caratteristica',
-                placeholder: 'es. developer che non usa il CSS · nocturnale occasionale',
-                value: trait,
-                onChange: setTrait,
-                max: 100,
-              },
-              {
-                id: 'looking',
-                label: 'una cosa che cerchi',
-                placeholder: 'es. qualcuno con cui camminare 8km · una persona presente',
-                value: lookingFor,
-                onChange: setLookingFor,
-                max: 100,
-              },
-            ].map((field) => (
-              <div key={field.id}>
-                <label className="font-mono text-[11px] text-ink-faint block mb-1.5">
-                  {field.label}
-                </label>
-                <input
-                  type="text"
-                  value={field.value}
-                  onChange={(e) => field.onChange(e.target.value)}
-                  placeholder={field.placeholder}
-                  maxLength={field.max}
-                  className="w-full px-4 py-3 bg-elevated border rounded-lg text-sm text-ink placeholder:text-ink-faint focus:outline-none transition-colors"
-                  style={{
-                    borderColor: 'var(--border-soft)',
-                  }}
-                  onFocus={(e) => {
-                    e.currentTarget.style.borderColor = '#D4A843'
-                  }}
-                  onBlur={(e) => {
-                    e.currentTarget.style.borderColor = 'var(--border-soft)'
-                  }}
-                />
-              </div>
-            ))}
-
-            <button
-              type="submit"
-              disabled={!canSubmit}
-              className="flex items-center gap-2.5 px-6 py-3 bg-ink text-paper text-sm font-medium rounded-lg transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
-              style={{ fontFamily: 'var(--font-geist-sans)' }}
-              onMouseEnter={(e) => {
-                if (!e.currentTarget.disabled) e.currentTarget.style.background = '#4A4540'
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.background = '#1A1714'
-              }}
+          {/* Form card with terminal chrome */}
+          <div
+            className="rounded-xl overflow-hidden border shadow-sm mb-8"
+            style={{ borderColor: 'var(--border-soft)' }}
+          >
+            {/* Chrome header */}
+            <div
+              className="px-5 py-3 border-b flex items-center justify-between"
+              style={{ background: '#F5F0E5', borderColor: 'var(--border-soft)' }}
             >
-              {isLoading ? (
-                <>
-                  <LoadingDots />
-                  analisi in corso...
-                </>
-              ) : (
-                'avvia analisi →'
-              )}
-            </button>
-          </form>
+              <div className="flex items-center gap-3">
+                <div className="flex gap-1.5">
+                  <div className="w-2.5 h-2.5 rounded-full bg-[#E05C5C]/60" />
+                  <div className="w-2.5 h-2.5 rounded-full bg-[#E8943A]/60" />
+                  <div className="w-2.5 h-2.5 rounded-full bg-[#4CAF72]/60" />
+                </div>
+                <span className="font-mono text-[11px] text-ink-faint">
+                  <span className="text-gold">$</span> compatibility_test.sh
+                </span>
+              </div>
+              <span className="font-mono text-[10px] text-ink-faint">
+                parametri:{' '}
+                <span
+                  className="transition-colors"
+                  style={{ color: filledCount === 3 ? '#4CAF72' : '#B8862A' }}
+                >
+                  {filledCount}/3
+                </span>
+                {filledCount === 3 && ' ✓'}
+              </span>
+            </div>
+
+            {/* Fields */}
+            <form onSubmit={handleSubmit} className="p-6 space-y-6 bg-elevated">
+              {FIELDS.map((field) => {
+                const [val, set] = getFieldState(field.id)
+                const isFocused = focused === field.id
+                return (
+                  <div key={field.id}>
+                    <div className="flex items-baseline gap-2 mb-1.5">
+                      <span className="font-mono text-[10px] text-gold shrink-0">[{field.num}]</span>
+                      <label className="font-mono text-[11px] text-ink-faint">{field.label}</label>
+                      <span className="font-mono text-[10px] text-ink-faint/50 hidden sm:inline truncate">
+                        — {field.sublabel}
+                      </span>
+                    </div>
+
+                    {/* Quick-fill chips */}
+                    <div className="flex flex-wrap gap-1.5 mb-2">
+                      {field.chips.map((chip) => (
+                        <button
+                          key={chip}
+                          type="button"
+                          onClick={() => set(chip)}
+                          className="font-mono text-[10px] px-2 py-1 rounded-md border transition-all duration-150 active:scale-95"
+                          style={{
+                            borderColor: val === chip ? '#D4A843' : 'var(--border-soft)',
+                            color: val === chip ? '#B8862A' : '#7A736B',
+                            background: val === chip ? '#FBF3E2' : 'var(--color-paper)',
+                          }}
+                        >
+                          {chip}
+                        </button>
+                      ))}
+                    </div>
+
+                    {/* Input with glow focus */}
+                    <div
+                      className="rounded-lg transition-all duration-200"
+                      style={{
+                        border: `1.5px solid ${isFocused ? '#D4A843' : 'var(--border-soft)'}`,
+                        boxShadow: isFocused ? '0 0 0 3px rgba(212,168,67,0.1)' : 'none',
+                      }}
+                    >
+                      <input
+                        type="text"
+                        value={val}
+                        onChange={(e) => set(e.target.value)}
+                        placeholder={field.placeholder}
+                        maxLength={field.max}
+                        onFocus={() => setFocused(field.id)}
+                        onBlur={() => setFocused(null)}
+                        className="w-full px-4 py-3 bg-elevated rounded-lg text-sm text-ink placeholder:text-ink-faint focus:outline-none"
+                      />
+                    </div>
+                  </div>
+                )
+              })}
+
+              <button
+                type="submit"
+                disabled={!canSubmit}
+                className="w-full flex items-center justify-center gap-2.5 px-6 py-3.5 bg-ink text-paper text-sm font-medium rounded-lg transition-all duration-150 disabled:opacity-40 disabled:cursor-not-allowed active:scale-[0.99]"
+                onMouseEnter={(e) => {
+                  if (!e.currentTarget.disabled) e.currentTarget.style.background = '#4A4540'
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.background = '#1A1714'
+                }}
+              >
+                {isLoading ? (
+                  <>
+                    <LoadingDots />
+                    analisi in corso...
+                  </>
+                ) : (
+                  <>
+                    <span className="font-mono text-[11px] opacity-50">[→]</span>
+                    avvia analisi
+                  </>
+                )}
+              </button>
+            </form>
+          </div>
 
           {error && (
             <p className="font-mono text-sm text-term-red mb-4">[ERROR] {error}</p>

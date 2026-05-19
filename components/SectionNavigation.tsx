@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { ChevronUp, ChevronDown } from 'lucide-react'
 
 const SECTIONS = [
-  { id: 'home', label: 'ana_dan.profile' },
+  { id: 'home', label: 'and.dan.profile' },
   { id: 'specs', label: 'specs.yaml' },
   { id: 'patches', label: 'patch_notes.md' },
   { id: 'compatibility', label: 'compatibility_test' },

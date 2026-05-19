@@ -33,7 +33,7 @@ export function Footer() {
         {/* Bottom bar */}
         <div className="flex flex-col sm:flex-row items-center justify-between gap-3">
           <span className="font-mono text-[11px] text-ink-faint">
-            ana_dan.bot · señorita edition · mirandola build
+            and.dan.bot · mirandola build
           </span>
           <span className="font-mono text-[11px] text-ink-faint">
             © 2026 · tutti i bug riservati 🌻
