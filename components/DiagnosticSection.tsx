@@ -71,7 +71,6 @@ export function DiagnosticSection() {
     <section
       id="diagnostic"
       className="py-16 md:py-24"
-      style={{ background: 'rgba(245,240,229,0.25)' }}
     >
       <div className="max-w-3xl mx-auto px-6">
         <motion.div
